@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+google-adk-docs.txt
+google-adk-python.txt
+concatenated_python_files.txt
+concatenate_py_files.py
+src_old/
