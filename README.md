@@ -34,8 +34,8 @@ When a user provides a shopping-related query, the `image_search_agent` utilizes
 ```
 shopping-assistant/
 ├── src/
-│   └── shopping_app/ <-- ADK Agent Module
-│       ├── __init__.py # Makes 'shopping_app' a Python package
+│   └── image_search/ <-- ADK Agent Module
+│       ├── __init__.py # Makes 'image_search' a Python package
 │       └── agent.py    # Contains all agent definitions
 └── .env                # For API key configuration
 ```

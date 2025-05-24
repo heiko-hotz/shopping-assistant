@@ -1,4 +1,4 @@
-# src/shopping_app/agent.py
+# src/image_search/agent.py
 from google.adk.agents import Agent
 from google.adk.tools.agent_tool import AgentTool
 from pydantic import BaseModel, Field
