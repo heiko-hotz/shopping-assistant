@@ -81,5 +81,4 @@ shopping-assistant/
 
 ## Development & Testing
 
-*   Development and testing utilize `adk web`.
-*   To run a specific assistant, ensure your ADK environment is configured to point to the correct module (e.g., `adk web src.image_search` or `adk web src.contextual_search`).
+*   Development and testing utilize `adk web src`.
