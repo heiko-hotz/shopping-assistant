@@ -1,9 +1,7 @@
-# src/image_search/agent.py
 from google.adk.agents import Agent
 from google.adk.tools.agent_tool import AgentTool
 from pydantic import BaseModel, Field
 
-# --- Define the Match Analyzer Agent ---
 class IntentAnalysisOutput(BaseModel):
     match_type: str = Field(description="The type of match identified: 'exact' or 'similar'.")
     reasoning: str = Field(description="A brief explanation for the classification.")
@@ -39,13 +37,8 @@ intent_analyzer_agent = Agent(
 print(f"Agent '{intent_analyzer_agent.name}' defined.")
 
 
-# --- Define the Root Agent (Shopping Coordinator) ---
-
-# Create an AgentTool instance from our match_analyzer_agent
 intent_analyzer_as_tool = AgentTool(agent=intent_analyzer_agent)
 
-# This is the main agent ADK will run.
-# It must be named 'root_agent'.
 root_agent = Agent(
     name="image_search_agent",
     model="gemini-2.0-flash",

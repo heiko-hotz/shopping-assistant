@@ -1,15 +1,11 @@
-# src/contextual_search/agent.py
 from google.adk.agents import Agent
 from google.adk.tools.agent_tool import AgentTool
 from pydantic import BaseModel, Field
 from typing import List, Optional
 
-# --- Define the Contextual Analysis Agent ---
 class ContextualAnalysisOutput(BaseModel):
-    # Simplified to bare essentials
     summary_of_understanding: str = Field(description="A brief summary of what the agent has understood from the user's request so far.")
     is_request_clear_enough_for_recommendations: bool = Field(description="True if the agent believes it has enough information to make relevant recommendations, False otherwise.")
-    # Removed identified_product_type, identified_context, identified_desire_or_intention, identified_filters, missing_information_questions
 
 contextual_request_analyzer_agent = Agent(
     name="contextual_request_analyzer_agent",
@@ -36,13 +32,8 @@ contextual_request_analyzer_agent = Agent(
 print(f"Agent '{contextual_request_analyzer_agent.name}' defined.")
 
 
-# --- Define the Root Agent (Contextual Shopping Coordinator) ---
-
-# Create an AgentTool instance from our contextual_request_analyzer_agent
 contextual_analyzer_as_tool = AgentTool(agent=contextual_request_analyzer_agent)
 
-# This is the main agent ADK will run.
-# It must be named 'root_agent'.
 root_agent = Agent(
     name="contextual_search_root_agent",
     model="gemini-2.0-flash",
@@ -80,15 +71,3 @@ root_agent = Agent(
     ]
 )
 print(f"Root Agent 'root_agent' (contextual_search_root_agent) defined with tool '{contextual_analyzer_as_tool.name}'.")
-
-# Comments about multi-turn handling are less relevant with the simplified schema but kept for context
-# To handle a potential second round of analysis if the first one needs clarification:
-# The root agent's instruction needs to guide it to call the analyzer again
-# with the combined initial query + answers.
-# The current structure implies a state ("waiting for answers") but ADK agents are stateless per call.
-# The root agent needs to be robust enough to understand if it's the first interaction or a follow-up.
-# This can be managed by checking if its prior turn involved asking questions, or by analyzing user input for "answering" cues.
-# For simplicity in this prompt, the instruction for step 4 assumes the agent can somehow know it's a follow-up
-# or the user explicitly provides all info.
-# A more robust solution might involve explicit state management or more complex prompt engineering
-# for the root_agent to handle multi-turn conversations gracefully.
