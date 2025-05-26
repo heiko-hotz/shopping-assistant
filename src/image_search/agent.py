@@ -10,10 +10,11 @@ class IntentAnalysisOutput(BaseModel):
 
 intent_analyzer_agent = Agent(
     name="intent_analyzer_agent",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash-preview-05-20",
     description="Analyzes a user's shopping request to determine if they want an exact match or a similar match. Returns 'exact' or 'similar'.",
     instruction=INTENT_ANALYZER_INSTRUCTIONS,
     output_schema=IntentAnalysisOutput,
+    output_key="intent_analysis_result"
 )
 print(f"Agent '{intent_analyzer_agent.name}' defined.")
 
@@ -22,7 +23,7 @@ intent_analyzer_as_tool = AgentTool(agent=intent_analyzer_agent)
 
 root_agent = Agent(
     name="image_search_agent",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash-preview-05-20",
     description="A shopping assistant that first analyzes the type of match a user wants.",
     instruction=IMAGE_SEARCH_AGENT_INSTRUCTIONS,
     tools=[

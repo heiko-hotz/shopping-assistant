@@ -10,10 +10,11 @@ class ContextualAnalysisOutput(BaseModel):
 
 contextual_request_analyzer_agent = Agent(
     name="contextual_request_analyzer_agent",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash-preview-05-20",
     description="Analyzes a user's shopping request to understand the product, context, desire, and any specified filters. Identifies missing information.",
     instruction=CONTEXTUAL_REQUEST_ANALYZER_INSTRUCTIONS,
     output_schema=ContextualAnalysisOutput,
+    output_key="contextual_analysis_result"
 )
 print(f"Agent '{contextual_request_analyzer_agent.name}' defined.")
 
@@ -22,7 +23,7 @@ contextual_analyzer_as_tool = AgentTool(agent=contextual_request_analyzer_agent)
 
 root_agent = Agent(
     name="contextual_search_root_agent",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash-preview-05-20",
     description="A shopping assistant that understands context, asks clarifying questions, and then summarizes needs.",
     instruction=CONTEXTUAL_SEARCH_ROOT_AGENT_INSTRUCTIONS,
     tools=[
